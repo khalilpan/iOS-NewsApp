@@ -8,7 +8,7 @@
 import Foundation
 
 enum NewsUrls: String {
-    case topHeadlines = "https://newsapi.org/v2/top-headlines?country=us&apiKey=da861279e5024fedbb825ccb49495edf"
+    case topHeadlines = "https://newsapi.org/v2/top-headlines?country=br&apiKey=da861279e5024fedbb825ccb49495edf"
 }
 
 final class APICaller {

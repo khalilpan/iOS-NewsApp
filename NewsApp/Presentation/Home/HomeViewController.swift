@@ -21,8 +21,7 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.viewModel.delegate = self
-        self.viewModel.fetchHealdLines()
+        
         
         self.navigationController?.navigationBar.prefersLargeTitles = true
         setupUI()
@@ -32,6 +31,9 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationItem.title = "News"
+        
+        self.viewModel.delegate = self
+        self.viewModel.fetchHealdLines()
     }
     
     private func setupUI() {
@@ -89,14 +91,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension HomeViewController: TopHeadlinesFetchDelegate {
+extension HomeViewController: TopHeadlinesFetchDelegate, NewsAppLoadingProtocol {
     func loadingStarted() {
-        print("=====Started.")
+        self.showLoadingIndicator()
     }
     
     func loadingFinished() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
+            self.closeLoadingIndicator()
         }
     }
 }

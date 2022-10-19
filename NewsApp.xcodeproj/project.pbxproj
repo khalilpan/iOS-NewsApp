@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE168E042900BD810010D10E /* NewsAppLoadingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE168E032900BD810010D10E /* NewsAppLoadingProtocol.swift */; };
 		CE20A34F2900533200FA3D1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20A34E2900533200FA3D1A /* AppDelegate.swift */; };
 		CE20A3512900533200FA3D1A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20A3502900533200FA3D1A /* SceneDelegate.swift */; };
 		CE20A3532900533200FA3D1A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20A3522900533200FA3D1A /* HomeViewController.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE168E032900BD810010D10E /* NewsAppLoadingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAppLoadingProtocol.swift; sourceTree = "<group>"; };
 		CE20A34B2900533200FA3D1A /* NewsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE20A34E2900533200FA3D1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE20A3502900533200FA3D1A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +51,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE168E022900BD1A0010D10E /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				CE168E032900BD810010D10E /* NewsAppLoadingProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		CE20A3422900533200FA3D1A = {
 			isa = PBXGroup;
 			children = (
@@ -68,6 +78,7 @@
 		CE20A34D2900533200FA3D1A /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				CE168E022900BD1A0010D10E /* Protocol */,
 				CE20A36729005C0A00FA3D1A /* Model */,
 				CE20A364290058D700FA3D1A /* API */,
 				CE20A3622900588100FA3D1A /* Presentation */,
@@ -203,6 +214,7 @@
 				CE20A36D29005CF800FA3D1A /* Source.swift in Sources */,
 				CE20A3512900533200FA3D1A /* SceneDelegate.swift in Sources */,
 				CE20A36929005C2C00FA3D1A /* APIResponse.swift in Sources */,
+				CE168E042900BD810010D10E /* NewsAppLoadingProtocol.swift in Sources */,
 				CE20A3702900668100FA3D1A /* HomeTableViewCell.swift in Sources */,
 				CE20A366290058EF00FA3D1A /* APICaller.swift in Sources */,
 			);
