@@ -92,6 +92,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if (indexPath.row < self.viewModel.articles.count) {
+            let article = self.viewModel.articles[indexPath.row]
+            
+            guard let url = URL(string: article.url ?? "") else { return }
+            
+            let vc = SFSafariViewController(url: url)
+            present(vc, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
