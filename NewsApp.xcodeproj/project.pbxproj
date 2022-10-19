@@ -9,21 +9,29 @@
 /* Begin PBXBuildFile section */
 		CE20A34F2900533200FA3D1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20A34E2900533200FA3D1A /* AppDelegate.swift */; };
 		CE20A3512900533200FA3D1A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20A3502900533200FA3D1A /* SceneDelegate.swift */; };
-		CE20A3532900533200FA3D1A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20A3522900533200FA3D1A /* ViewController.swift */; };
+		CE20A3532900533200FA3D1A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20A3522900533200FA3D1A /* HomeViewController.swift */; };
 		CE20A3562900533200FA3D1A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE20A3542900533200FA3D1A /* Main.storyboard */; };
 		CE20A3582900533500FA3D1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE20A3572900533500FA3D1A /* Assets.xcassets */; };
 		CE20A35B2900533500FA3D1A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE20A3592900533500FA3D1A /* LaunchScreen.storyboard */; };
+		CE20A366290058EF00FA3D1A /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20A365290058EF00FA3D1A /* APICaller.swift */; };
+		CE20A36929005C2C00FA3D1A /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20A36829005C2C00FA3D1A /* APIResponse.swift */; };
+		CE20A36B29005C7C00FA3D1A /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20A36A29005C7C00FA3D1A /* Article.swift */; };
+		CE20A36D29005CF800FA3D1A /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20A36C29005CF800FA3D1A /* Source.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CE20A34B2900533200FA3D1A /* NewsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE20A34E2900533200FA3D1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE20A3502900533200FA3D1A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CE20A3522900533200FA3D1A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CE20A3522900533200FA3D1A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CE20A3552900533200FA3D1A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE20A3572900533500FA3D1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE20A35A2900533500FA3D1A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE20A35C2900533500FA3D1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE20A365290058EF00FA3D1A /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
+		CE20A36829005C2C00FA3D1A /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		CE20A36A29005C7C00FA3D1A /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		CE20A36C29005CF800FA3D1A /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +64,51 @@
 		CE20A34D2900533200FA3D1A /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				CE20A36729005C0A00FA3D1A /* Model */,
+				CE20A364290058D700FA3D1A /* API */,
+				CE20A3622900588100FA3D1A /* Presentation */,
+				CE20A3542900533200FA3D1A /* Main.storyboard */,
 				CE20A34E2900533200FA3D1A /* AppDelegate.swift */,
 				CE20A3502900533200FA3D1A /* SceneDelegate.swift */,
-				CE20A3522900533200FA3D1A /* ViewController.swift */,
-				CE20A3542900533200FA3D1A /* Main.storyboard */,
 				CE20A3572900533500FA3D1A /* Assets.xcassets */,
 				CE20A3592900533500FA3D1A /* LaunchScreen.storyboard */,
 				CE20A35C2900533500FA3D1A /* Info.plist */,
 			);
 			path = NewsApp;
+			sourceTree = "<group>";
+		};
+		CE20A3622900588100FA3D1A /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				CE20A3632900588E00FA3D1A /* Home */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		CE20A3632900588E00FA3D1A /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				CE20A3522900533200FA3D1A /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		CE20A364290058D700FA3D1A /* API */ = {
+			isa = PBXGroup;
+			children = (
+				CE20A365290058EF00FA3D1A /* APICaller.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		CE20A36729005C0A00FA3D1A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CE20A36829005C2C00FA3D1A /* APIResponse.swift */,
+				CE20A36A29005C7C00FA3D1A /* Article.swift */,
+				CE20A36C29005CF800FA3D1A /* Source.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +182,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE20A3532900533200FA3D1A /* ViewController.swift in Sources */,
+				CE20A3532900533200FA3D1A /* HomeViewController.swift in Sources */,
 				CE20A34F2900533200FA3D1A /* AppDelegate.swift in Sources */,
+				CE20A36B29005C7C00FA3D1A /* Article.swift in Sources */,
+				CE20A36D29005CF800FA3D1A /* Source.swift in Sources */,
 				CE20A3512900533200FA3D1A /* SceneDelegate.swift in Sources */,
+				CE20A36929005C2C00FA3D1A /* APIResponse.swift in Sources */,
+				CE20A366290058EF00FA3D1A /* APICaller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
