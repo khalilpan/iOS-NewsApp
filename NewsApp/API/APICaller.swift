@@ -16,7 +16,7 @@ final class APICaller {
     
     private init() {}
     
-    public func getTopStories(completion: @escaping  (Result<[String], Error>) -> Void ) {
+    public func getTopStories(completion: @escaping  (Result<[Article], Error>) -> Void ) {
         guard let url = URL(string: NewsUrls.topHeadlines.rawValue) else { return }
         
         let task = URLSession.shared.dataTask(with: url) { (data, _, error) in
@@ -28,7 +28,7 @@ final class APICaller {
                 do {
                     let result = try JSONDecoder().decode(APIResponse.self, from: data)
                     
-                    print("Articles: \(result)")
+                    completion(.success(result.articles))
                 } catch {
                     completion(.failure(error))
                 }
