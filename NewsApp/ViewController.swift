@@ -9,11 +9,14 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    override func viewWillAppear(_ animated: Bool) {
+        
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
     }
-
-
 }
 
