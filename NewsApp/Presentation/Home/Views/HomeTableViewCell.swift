@@ -12,14 +12,15 @@ class HomeTableViewCell: UITableViewCell {
     
     private let newsTitleLabel: UILabel = {
         let view = UILabel()
-        view.font = .systemFont(ofSize: 25, weight: .medium)
+        view.numberOfLines = 2
+        view.font = .systemFont(ofSize: 22, weight: .semibold)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private let subTitleLabel: UILabel = {
         let view = UILabel()
-        view.font = .systemFont(ofSize: 18, weight: .regular)
+        view.font = .systemFont(ofSize: 17, weight: .light)
         view.numberOfLines = 0
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -27,6 +28,8 @@ class HomeTableViewCell: UITableViewCell {
     
     private let newsImageView: UIImageView = {
         let view = UIImageView()
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
         view.backgroundColor = .secondarySystemBackground
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true

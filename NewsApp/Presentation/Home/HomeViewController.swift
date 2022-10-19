@@ -21,6 +21,9 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.viewModel.delegate = self
+        self.viewModel.fetchHealdLines()
+        
         self.navigationController?.navigationBar.prefersLargeTitles = true
         setupUI()
     }
@@ -29,28 +32,6 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationItem.title = "News"
-        APICaller.sharedInstance.getTopStories { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let response):
-                self.viewModel.articles = response
-                self.viewModel.headLines = response.compactMap({ HomeTableViewCellType(
-                    title: $0.title,
-                    subtitle: $0.description ?? "No Description",
-                    imageURL: URL(string: $0.urlToImage ?? "")
-                )
-                })
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            case .failure(let error):
-                print(error)
-                
-            default:
-                break
-            }
-        }
     }
     
     private func setupUI() {
@@ -105,5 +86,17 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
+    }
+}
+
+extension HomeViewController: TopHeadlinesFetchDelegate {
+    func loadingStarted() {
+        print("=====Started.")
+    }
+    
+    func loadingFinished() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }

@@ -7,6 +7,11 @@
 
 import Foundation
 
+protocol TopHeadlinesFetchDelegate: AnyObject {
+    func loadingStarted()
+    func loadingFinished()
+}
+
 struct HomeTableViewCellType {
     let title: String
     let subtitle: String
@@ -26,4 +31,29 @@ struct HomeTableViewCellType {
 class HomeViewModel {
     var headLines: [HomeTableViewCellType] = []
     var articles: [Article] = []
+    weak var delegate: TopHeadlinesFetchDelegate?
+    
+    func fetchHealdLines() {
+        self.delegate?.loadingStarted()
+        APICaller.sharedInstance.getTopStories { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let response):
+                self.articles = response
+                self.headLines = response.compactMap({ HomeTableViewCellType(
+                    title: $0.title,
+                    subtitle: $0.description ?? "No Description",
+                    imageURL: URL(string: $0.urlToImage ?? "")
+                )
+                })
+                
+                self.delegate?.loadingFinished()
+            case .failure(let error):
+                print(error)
+                
+            default:
+                break
+            }
+        }
+    }
 }
