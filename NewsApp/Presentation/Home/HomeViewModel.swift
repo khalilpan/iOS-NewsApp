@@ -50,9 +50,7 @@ class HomeViewModel {
                 self.delegate?.loadingFinished()
             case .failure(let error):
                 print(error)
-                
-            default:
-                break
+                //TODO: - Show DS error Dialog
             }
         }
     }

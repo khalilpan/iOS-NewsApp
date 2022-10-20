@@ -21,8 +21,6 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
-        
         self.navigationController?.navigationBar.prefersLargeTitles = true
         setupUI()
     }
@@ -79,7 +77,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         if (indexPath.row < self.viewModel.articles.count) {
             let article = self.viewModel.articles[indexPath.row]
             
-            guard let url = URL(string: article.url ?? "") else { return }
+            guard let url = URL(string: article.url) else { return }
             
             let vc = SFSafariViewController(url: url)
             present(vc, animated: true)
@@ -91,6 +89,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+//MARK: - TopHeadlinesFetchDelegate, NewsAppLoadingProtocol
 extension HomeViewController: TopHeadlinesFetchDelegate, NewsAppLoadingProtocol {
     func loadingStarted() {
         self.showLoadingIndicator()
