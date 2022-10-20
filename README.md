@@ -30,3 +30,8 @@ ViewModels, Views, APICaller, Models, protocols
 **Home page after hide loading indicator**
 
 ![Home](https://user-images.githubusercontent.com/40691961/197014383-535e9e02-aaa3-4ba5-9f2c-cea3d035a731.png)
+
+**Type a word to make a news search and pull the last 100 related articles**
+
+![Search](https://user-images.githubusercontent.com/40691961/197014829-7f8a6ab7-d21d-44e9-a6f5-b64190e79253.png)
+
