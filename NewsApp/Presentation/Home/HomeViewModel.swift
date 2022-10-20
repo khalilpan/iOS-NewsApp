@@ -33,11 +33,12 @@ class HomeViewModel {
     var articles: [Article] = []
     weak var delegate: TopHeadlinesFetchDelegate?
     var completionClosure: ((Result<[Article], Error>) -> Void)? = nil
+    var showLoadingIndicator: Bool = true
     
     init() {
         self.completionClosure = { [weak self] result in
             guard let self = self else { return }
-            self.delegate?.loadingStarted()
+            self.showLoadingIndicator ? self.delegate?.loadingStarted() : nil
             
             switch result {
             case .success(let response):
@@ -58,7 +59,9 @@ class HomeViewModel {
         }
     }
     
-    func fetchHealdLines() {
+    //TODO: - Cosolidate functions fetchHealdLines and searcHeadlines
+    func fetchHealdLines(showLoadingIndicator: Bool = true) {
+        self.showLoadingIndicator = showLoadingIndicator
         guard let completionClosure = self.completionClosure else { return }
         APICaller.sharedInstance.performGetArticlesCall(callType: .topHeadlines,
                                                         with: nil,

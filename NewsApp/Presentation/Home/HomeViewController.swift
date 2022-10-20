@@ -19,6 +19,7 @@ class HomeViewController: UIViewController {
     }()
     
     private var searchVC = UISearchController(searchResultsController: nil)
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,7 @@ class HomeViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         setupUI()
+        setupRefreshControl()
         self.viewModel.delegate = self
         self.viewModel.fetchHealdLines()
     }
@@ -47,6 +49,24 @@ class HomeViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         searchVC.searchBar.delegate = self
+    }
+    
+    private func setupRefreshControl() {
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(handleRefreshPull), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+    }
+    
+    @objc func handleRefreshPull() {
+        if let text = self.searchVC.searchBar.text, !text.isEmpty {
+            self.viewModel.searcHeadlines(searchText: text)
+        } else {
+            self.viewModel.fetchHealdLines(showLoadingIndicator: false)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1/2)) {
+            self.refreshControl.endRefreshing()
+        }
     }
 }
 
