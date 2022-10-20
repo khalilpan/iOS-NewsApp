@@ -79,19 +79,23 @@ class HomeTableViewCell: UITableViewCell {
         if let image = imageData {
             newsImageView.image = UIImage(data: image)
         } else if let url = data.imageURL {
-            //fetch image
-            URLSession.shared.dataTask(with: url) { [weak self] image, _, error in
+            //            fetch image
+            APICaller.sharedInstance.fetchImage(url: url, completion: { [weak self] result in
                 guard let self = self else { return }
                 
-                guard let image = image, error == nil else {
-                    return
+                switch result {
+                case .success(let data):
+                    imageData = data
+                    DispatchQueue.main.async {
+                        self.newsImageView.image = UIImage(data: data)
+                    }
+                case .failure(let error):
+                    debugPrint(error)
+                    
+                default:
+                    break
                 }
-                
-                imageData = image
-                DispatchQueue.main.async {
-                    self.newsImageView.image = UIImage(data: image)
-                }
-            }.resume()
+            })
         }
     }
 }

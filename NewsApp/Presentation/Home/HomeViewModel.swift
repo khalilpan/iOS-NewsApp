@@ -35,7 +35,6 @@ class HomeViewModel {
     
     func fetchHealdLines() {
         self.delegate?.loadingStarted()
-        debugPrint("===== loading started")
         APICaller.sharedInstance.getTopStories { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -49,7 +48,6 @@ class HomeViewModel {
                 })
                 
                 self.delegate?.loadingFinished()
-                debugPrint("===== loading finished")
             case .failure(let error):
                 print(error)
                 
