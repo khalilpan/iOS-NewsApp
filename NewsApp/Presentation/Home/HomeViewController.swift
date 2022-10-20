@@ -18,6 +18,8 @@ class HomeViewController: UIViewController {
         return view
     }()
     
+    private var searchVC = UISearchController(searchResultsController: nil)
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -36,6 +38,7 @@ class HomeViewController: UIViewController {
     
     private func setupUI() {
         view.addSubview(tableView)
+        navigationItem.searchController = searchVC
         
         var constraints = [NSLayoutConstraint]()
         
@@ -48,6 +51,7 @@ class HomeViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        searchVC.searchBar.delegate = self
     }
 }
 
@@ -100,5 +104,14 @@ extension HomeViewController: TopHeadlinesFetchDelegate, NewsAppLoadingProtocol 
             self.tableView.reloadData()
             self.closeLoadingIndicator()
         }
+    }
+}
+
+//MARK: - UISearchBarDelegate
+extension HomeViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text, !text.isEmpty else { return }
+        
+        print(text)
     }
 }
