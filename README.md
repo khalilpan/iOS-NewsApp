@@ -22,3 +22,11 @@ ViewModels, Views, APICaller, Models, protocols
 **AppIcone**
 
 ![App Icone](https://user-images.githubusercontent.com/40691961/197013773-fbb3610b-2a09-47e2-91de-932c04bdbda1.png)
+
+**Home Page after run the application with Loading Indicator**
+
+![Home Loading Indicator using Protocol](https://user-images.githubusercontent.com/40691961/197014111-17fcc8ce-135e-4a56-8aa2-9fe12e618d16.png)
+
+**Home page after hide loading indicator**
+
+![Home](https://user-images.githubusercontent.com/40691961/197014383-535e9e02-aaa3-4ba5-9f2c-cea3d035a731.png)
