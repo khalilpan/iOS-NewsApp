@@ -38,3 +38,12 @@ ViewModels, Views, APICaller, Models, protocols
 **Navigate to article's complete details after click any article**
 
 ![SafariWebView](https://user-images.githubusercontent.com/40691961/197015009-b1af0e22-44ec-4809-a9c2-095c946be9d3.png)
+
+**Pull To Refresh Home screen with Empty Search Bar**
+
+![Pull to refresh - Home](https://user-images.githubusercontent.com/40691961/197015651-45bd4f67-0e23-4737-940e-35bcdc7fe0ff.png)
+
+**Pull To Refresh Home screen with Non Empty Search Bar**
+
+![Pull to refresh - serach bar](https://user-images.githubusercontent.com/40691961/197015847-70cef20c-499e-490f-9944-04d43c77aaf1.png)
+
