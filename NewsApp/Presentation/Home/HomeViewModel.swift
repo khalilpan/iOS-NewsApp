@@ -41,7 +41,7 @@ class HomeViewModel {
             case .success(let response):
                 self.articles = response
                 self.headLines = response.compactMap({ HomeTableViewCellType(
-                    title: $0.title,
+                    title: $0.title ?? "No Title",
                     subtitle: $0.description ?? "No Description",
                     imageURL: URL(string: $0.urlToImage ?? "")
                 )
