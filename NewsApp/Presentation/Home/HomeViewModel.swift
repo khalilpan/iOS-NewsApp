@@ -60,13 +60,17 @@ class HomeViewModel {
     
     func fetchHealdLines() {
         guard let completionClosure = self.completionClosure else { return }
-        APICaller.sharedInstance.getTopStories(completion: completionClosure)
+        APICaller.sharedInstance.performGetArticlesCall(callType: .topHeadlines,
+                                                        with: nil,
+                                                        completion: completionClosure)
         self.delegate?.loadingFinished()
     }
     
     func searcHeadlines(searchText: String) {
         guard let completionClosure = self.completionClosure else { return }
-        APICaller.sharedInstance.search(with: searchText, completion: completionClosure)
+        APICaller.sharedInstance.performGetArticlesCall(callType: .searchQuery,
+                                                        with: searchText,
+                                                        completion: completionClosure)
         self.delegate?.loadingFinished()
     }
 }
