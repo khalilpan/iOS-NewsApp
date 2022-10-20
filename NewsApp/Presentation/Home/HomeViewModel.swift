@@ -32,11 +32,13 @@ class HomeViewModel {
     var headLines: [HomeTableViewCellType] = []
     var articles: [Article] = []
     weak var delegate: TopHeadlinesFetchDelegate?
+    var completionClosure: ((Result<[Article], Error>) -> Void)? = nil
     
-    func fetchHealdLines() {
-        self.delegate?.loadingStarted()
-        APICaller.sharedInstance.getTopStories { [weak self] result in
+    init() {
+        self.completionClosure = { [weak self] result in
             guard let self = self else { return }
+            self.delegate?.loadingStarted()
+            
             switch result {
             case .success(let response):
                 self.articles = response
@@ -47,11 +49,24 @@ class HomeViewModel {
                 )
                 })
                 
-                self.delegate?.loadingFinished()
             case .failure(let error):
                 print(error)
                 //TODO: - Show DS error Dialog
             }
+            
+            self.delegate?.loadingFinished()
         }
+    }
+    
+    func fetchHealdLines() {
+        guard let completionClosure = self.completionClosure else { return }
+        APICaller.sharedInstance.getTopStories(completion: completionClosure)
+        self.delegate?.loadingFinished()
+    }
+    
+    func searcHeadlines(searchText: String) {
+        guard let completionClosure = self.completionClosure else { return }
+        APICaller.sharedInstance.search(with: searchText, completion: completionClosure)
+        self.delegate?.loadingFinished()
     }
 }

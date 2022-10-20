@@ -96,7 +96,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: - TopHeadlinesFetchDelegate, NewsAppLoadingProtocol
 extension HomeViewController: TopHeadlinesFetchDelegate, NewsAppLoadingProtocol {
     func loadingStarted() {
-        self.showLoadingIndicator()
+        DispatchQueue.main.async {
+            self.showLoadingIndicator()
+        }
     }
     
     func loadingFinished() {
@@ -112,6 +114,6 @@ extension HomeViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text, !text.isEmpty else { return }
         
-        print(text)
+        self.viewModel.searcHeadlines(searchText: text)
     }
 }
