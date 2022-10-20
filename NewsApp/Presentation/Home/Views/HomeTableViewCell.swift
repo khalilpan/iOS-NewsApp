@@ -80,7 +80,7 @@ class HomeTableViewCell: UITableViewCell {
             newsImageView.image = UIImage(data: image)
         } else if let url = data.imageURL {
             
-            //TODO: - Move APICaller to HomeViewController
+            //TODO: - Move APICaller to HomeViewModel
             APICaller.sharedInstance.fetchImage(url: url, completion: { [weak self] result in
                 guard let self = self else { return }
                 
@@ -90,11 +90,9 @@ class HomeTableViewCell: UITableViewCell {
                     DispatchQueue.main.async {
                         self.newsImageView.image = UIImage(data: data)
                     }
+                    
                 case .failure(let error):
                     debugPrint(error)
-                    
-                default:
-                    break
                 }
             })
         }
