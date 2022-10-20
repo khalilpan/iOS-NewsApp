@@ -35,3 +35,6 @@ ViewModels, Views, APICaller, Models, protocols
 
 ![Search](https://user-images.githubusercontent.com/40691961/197014829-7f8a6ab7-d21d-44e9-a6f5-b64190e79253.png)
 
+**Navigate to article's complete details after click any article**
+
+![SafariWebView](https://user-images.githubusercontent.com/40691961/197015009-b1af0e22-44ec-4809-a9c2-095c946be9d3.png)
