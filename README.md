@@ -8,6 +8,10 @@ In the home page will appear the last 20 Top Headlines and it's possible to navi
 
 I used delegation pattern as a trigger for some necessary actions from ViewModel into the ViewController
 
+**Image Cache**
+
+To avoid download images repeatedly, i keep downloaded images in the cache and reuse them as tableViewCell appears on screen.
+
 **NewsAppLoadingProtocol**
 
 I used a protocol to manage Loading Indicator in viewController: (whenever we want to show the Loading indicator, just need to conform the "ViewController" to protocol "NewsAppLoadingProtocol" and then call functions "showLoadingIndicator", "closeLoadingIndicator"):
