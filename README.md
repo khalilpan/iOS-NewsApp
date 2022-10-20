@@ -47,3 +47,6 @@ ViewModels, Views, APICaller, Models, protocols
 
 ![Pull to refresh - serach bar](https://user-images.githubusercontent.com/40691961/197015847-70cef20c-499e-490f-9944-04d43c77aaf1.png)
 
+**Some Debug Print in the output for API Calls**
+
+![APICaller Debugger-searchQuery](https://user-images.githubusercontent.com/40691961/197016127-e194b3c0-bc43-4476-a554-547950c44917.png)
