@@ -79,7 +79,8 @@ class HomeTableViewCell: UITableViewCell {
         if let image = imageData {
             newsImageView.image = UIImage(data: image)
         } else if let url = data.imageURL {
-            //            fetch image
+            
+            //TODO: - Move APICaller to HomeViewController
             APICaller.sharedInstance.fetchImage(url: url, completion: { [weak self] result in
                 guard let self = self else { return }
                 

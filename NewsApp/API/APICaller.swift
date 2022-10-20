@@ -8,6 +8,7 @@
 import Foundation
 
 enum NewsUrls: String {
+    //TODO: - Remove APIKey from APICaller
     case topHeadlines = "https://newsapi.org/v2/top-headlines?country=br&apiKey=da861279e5024fedbb825ccb49495edf"
 }
 
