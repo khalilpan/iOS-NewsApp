@@ -36,7 +36,7 @@ final class APICaller {
             self.url = url
         }
         
-        self.articlesApiCallsDebugPrint(type: .startCalling, callType: callType, dataToPrint: nil)
+        self.articlesApiCallsDebugPrint(type: .startCalling, callType: callType, dataToPrint: query)
         
         guard let url = url else { return }
         let task = URLSession.shared.dataTask(with: url) { (data, _, error) in
@@ -84,7 +84,11 @@ final class APICaller {
         switch type {
         case .startCalling:
             debugPrint("##### CALLING API TYPE -> \(callType) -> \(Date())")
-            debugPrint("🔵##### CALLING API URL -> \(callType.rawValue)")
+            guard let dataToPrint = dataToPrint else {
+                debugPrint("🔵##### CALLING API URL -> \(callType.rawValue)")
+                return
+            }
+            debugPrint("🔵##### CALLING API URL -> \(callType.rawValue + dataToPrint)")
             
         case .successResult:
             debugPrint("##### RESULT API TYPE -> \(callType) -> \(Date())")

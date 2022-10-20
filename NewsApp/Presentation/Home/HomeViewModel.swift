@@ -52,27 +52,18 @@ class HomeViewModel {
                 
             case .failure(let error):
                 print(error)
-                //TODO: - Show DS error Dialog
+                //TODO: - Show Design sysytem's error Dialog
             }
             
             self.delegate?.loadingFinished()
         }
     }
     
-    //TODO: - Cosolidate functions fetchHealdLines and searcHeadlines
-    func fetchHealdLines(showLoadingIndicator: Bool = true) {
+    func fetchHealdLines(calltype: NewsArticlesCallType,with query: String?,showLoadingIndicator: Bool = true) {
         self.showLoadingIndicator = showLoadingIndicator
         guard let completionClosure = self.completionClosure else { return }
-        APICaller.sharedInstance.performGetArticlesCall(callType: .topHeadlines,
-                                                        with: nil,
-                                                        completion: completionClosure)
-        self.delegate?.loadingFinished()
-    }
-    
-    func searcHeadlines(searchText: String) {
-        guard let completionClosure = self.completionClosure else { return }
-        APICaller.sharedInstance.performGetArticlesCall(callType: .searchQuery,
-                                                        with: searchText,
+        APICaller.sharedInstance.performGetArticlesCall(callType: calltype,
+                                                        with: query,
                                                         completion: completionClosure)
         self.delegate?.loadingFinished()
     }

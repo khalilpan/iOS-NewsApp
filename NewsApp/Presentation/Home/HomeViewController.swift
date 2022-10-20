@@ -30,7 +30,7 @@ class HomeViewController: UIViewController {
         setupUI()
         setupRefreshControl()
         self.viewModel.delegate = self
-        self.viewModel.fetchHealdLines()
+        self.viewModel.fetchHealdLines(calltype: .topHeadlines, with: nil)
     }
     
     private func setupUI() {
@@ -57,12 +57,15 @@ class HomeViewController: UIViewController {
         tableView.addSubview(refreshControl)
     }
     
-    @objc func handleRefreshPull() {
+    @objc private func handleRefreshPull() {
+        var queryText: String? = nil
+        var callType: NewsArticlesCallType = .topHeadlines
         if let text = self.searchVC.searchBar.text, !text.isEmpty {
-            self.viewModel.searcHeadlines(searchText: text)
-        } else {
-            self.viewModel.fetchHealdLines(showLoadingIndicator: false)
+            queryText = text
+            callType = .searchQuery
         }
+        
+        self.viewModel.fetchHealdLines(calltype: callType, with: queryText, showLoadingIndicator: false)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1/2)) {
             self.refreshControl.endRefreshing()
@@ -129,6 +132,6 @@ extension HomeViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text, !text.isEmpty else { return }
         
-        self.viewModel.searcHeadlines(searchText: text)
+        self.viewModel.fetchHealdLines(calltype: .searchQuery, with: text, showLoadingIndicator: false)
     }
 }
