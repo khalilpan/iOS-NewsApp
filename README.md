@@ -18,3 +18,7 @@ I created the singleton "APICaller" just to perform API Calls.
 
 I used mvvm architecture to separate all responsibilities between different layers:
 ViewModels, Views, APICaller, Models, protocols
+
+**AppIcone**
+
+![App Icone](https://user-images.githubusercontent.com/40691961/197013773-fbb3610b-2a09-47e2-91de-932c04bdbda1.png)
