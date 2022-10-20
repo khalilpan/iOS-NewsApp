@@ -20,18 +20,13 @@ class HomeViewController: UIViewController {
     
     private var searchVC = UISearchController(searchResultsController: nil)
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        setupUI()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationItem.title = "News"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         
+        setupUI()
         self.viewModel.delegate = self
         self.viewModel.fetchHealdLines()
     }
