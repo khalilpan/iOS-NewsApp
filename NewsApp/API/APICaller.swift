@@ -22,19 +22,9 @@ enum ArticlesApiCallsDebugPrintType {
 final class APICaller {
     static let sharedInstance = APICaller()
     
-    private var url: URL? = nil
-    
-    public func performGetArticlesCall(callType: NewsArticlesCallType, with query: String?, completion: @escaping  (Result<[Article], Error>) -> Void) {
-        
-        switch callType {
-        case .topHeadlines:
-            guard let url = URL(string: NewsArticlesCallType.topHeadlines.rawValue) else { return }
-            self.url = url
-        case .searchQuery:
-            guard let query = query, !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-            guard let url = URL(string: NewsArticlesCallType.searchQuery.rawValue + query) else { return }
-            self.url = url
-        }
+    public func performApiNewsGetCall<T>(callType: NewsArticlesCallType, with query: String?, completion: @escaping (Result<T, Error>) -> Void ) {
+        let url: URL? = getUrl(callType: callType,
+                               with: query)
         
         self.articlesApiCallsDebugPrint(type: .startCalling, callType: callType, dataToPrint: query)
         
@@ -50,11 +40,12 @@ final class APICaller {
                     let result = try JSONDecoder().decode(APIResponse.self, from: data)
                     
                     self.articlesApiCallsDebugPrint(type: .successResult,
-                                               callType: callType,
-                                               dataToPrint: String(result.articles.count))
-                    completion(.success(result.articles))
+                                                    callType: callType,
+                                                    dataToPrint: String(result.articles.count))
+                    if let articlesToReturn = result.articles as? T {
+                        completion(.success(articlesToReturn))
+                    }
                 } catch {
-                    
                     self.articlesApiCallsDebugPrint(type: .errorResult,
                                                     callType: callType,
                                                     dataToPrint: String(describing: error))
@@ -101,5 +92,22 @@ final class APICaller {
             debugPrint("🔴##### ERROR -> \(dataToPrint)")
         }
         debugPrint("**--------------------​----------------------------**")
+    }
+    
+    private func getUrl(callType: NewsArticlesCallType, with query: String?) -> URL? {
+        
+        var url: URL? = nil
+        
+        switch callType {
+        case .topHeadlines:
+            guard let urlToUse = URL(string: NewsArticlesCallType.topHeadlines.rawValue) else { return nil}
+            url = urlToUse
+        case .searchQuery:
+            guard let query = query, !query.trimmingCharacters(in: .whitespaces).isEmpty else { return nil}
+            guard let urlToUse = URL(string: NewsArticlesCallType.searchQuery.rawValue + query) else { return nil}
+            url = urlToUse
+        }
+        
+        return url
     }
 }

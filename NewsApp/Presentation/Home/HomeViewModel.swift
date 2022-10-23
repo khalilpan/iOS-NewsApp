@@ -62,9 +62,9 @@ class HomeViewModel {
     func fetchHealdLines(calltype: NewsArticlesCallType,with query: String?,showLoadingIndicator: Bool = true) {
         self.showLoadingIndicator = showLoadingIndicator
         guard let completionClosure = self.completionClosure else { return }
-        APICaller.sharedInstance.performGetArticlesCall(callType: calltype,
-                                                        with: query,
-                                                        completion: completionClosure)
+        APICaller.sharedInstance.performApiNewsGetCall(callType: calltype,
+                                                       with: query,
+                                                       completion: completionClosure)
         self.delegate?.loadingFinished()
     }
 }
