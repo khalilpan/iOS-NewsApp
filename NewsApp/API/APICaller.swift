@@ -8,13 +8,13 @@
 import Foundation
 
 enum NewsArticlesCallType: String {
-        case topHeadlines = "https://newsapi.org/v2/top-headlines?"
-        case searchQuery = "https://newsapi.org/v2/everything?"
+    case topHeadlines = "https://newsapi.org/v2/top-headlines?"
+    case searchQuery = "https://newsapi.org/v2/everything?"
 }
 
 enum NewsArticlesUrlParameters: String {
     //TODO: - Remove APIKey from APICaller
-    case apiKey = "&apiKey=495b6c78842c4ab9903085dacfddce97"
+    case apiKey = "&apiKey=da861279e5024fedbb825ccb49495edf"
     case country = "country=US"
     case sortBy = "sortBy=popularity"
     case query = "&q="
@@ -30,32 +30,25 @@ final class APICaller {
     static let sharedInstance = APICaller()
     
     public func performApiNewsGetCall<T>(callType: NewsArticlesCallType, with query: String?, completion: @escaping (Result<T, Error>) -> Void ) {
-        let url: URL? = getUrl(callType: callType,
-                               with: query)
+        let url: URL? = getUrl(callType: callType, with: query)
         
-        self.articlesApiCallsDebugPrint(type: .startCalling, callType: callType, dataToPrint: query)
+        self.articlesApiCallsDebugPrint(type: .startCalling, callType: callType, dataToPrint: url?.absoluteString)
         
         guard let url = url else { return }
         let task = URLSession.shared.dataTask(with: url) { (data, _, error) in
             if let error = error {
-                self.articlesApiCallsDebugPrint(type: .errorResult,
-                                                callType: callType,
-                                                dataToPrint: String(describing: error))
+                self.articlesApiCallsDebugPrint(type: .errorResult, callType: callType, dataToPrint: String(describing: error))
                 completion(.failure(error))
             } else if let data = data {
                 do {
                     let result = try JSONDecoder().decode(APIResponse.self, from: data)
                     
-                    self.articlesApiCallsDebugPrint(type: .successResult,
-                                                    callType: callType,
-                                                    dataToPrint: String(result.articles.count))
+                    self.articlesApiCallsDebugPrint(type: .successResult, callType: callType, dataToPrint: String(result.articles.count))
                     if let articlesToReturn = result.articles as? T {
                         completion(.success(articlesToReturn))
                     }
                 } catch {
-                    self.articlesApiCallsDebugPrint(type: .errorResult,
-                                                    callType: callType,
-                                                    dataToPrint: String(describing: error))
+                    self.articlesApiCallsDebugPrint(type: .errorResult, callType: callType, dataToPrint: String(describing: error))
                     completion(.failure(error))
                 }
             }
@@ -83,10 +76,10 @@ final class APICaller {
         case .startCalling:
             debugPrint("##### CALLING API TYPE -> \(callType) -> \(Date())")
             guard let dataToPrint = dataToPrint else {
-                debugPrint("🔵##### CALLING API URL -> \(callType.rawValue)")
+                debugPrint("🔵##### CALLING API URL -> \(dataToPrint)")
                 return
             }
-            debugPrint("🔵##### CALLING API URL -> \(callType.rawValue + dataToPrint)")
+            debugPrint("🔵##### CALLING API URL -> \(dataToPrint)")
             
         case .successResult:
             debugPrint("##### RESULT API TYPE -> \(callType) -> \(Date())")
