@@ -16,8 +16,8 @@ class HomeViewModel {
     var headLines: [HomeTableViewCellType] = []
     var articles: [Article] = []
     weak var delegate: TopHeadlinesFetchDelegate?
-    var completionClosure: ((Result<[Article], Error>) -> Void)? = nil
-    var showLoadingIndicator: Bool = true
+    private var completionClosure: ((Result<[Article], Error>) -> Void)? = nil
+    private var showLoadingIndicator: Bool = true
     
     init() {
         setupCompletionClosure()
@@ -27,7 +27,8 @@ class HomeViewModel {
         self.showLoadingIndicator = showLoadingIndicator
         guard let completionClosure = self.completionClosure else { return }
         
-        //TODO: - Create a BusinessModel and use it inside viewModel instead of Accessing directly Repository(Accessing Repository should be just from businessModel)
+        //TODO: - Create a BusinessModel and use it inside viewModel instead of Accessing directly Repository
+        //(Accessing Repository should be just from businessModel)
         NewsApiRepository.sharedInstance.performApiNewsGetCall(callType: calltype,
                                                                with: query,
                                                                completion: completionClosure)
