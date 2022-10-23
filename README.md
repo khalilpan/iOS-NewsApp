@@ -18,9 +18,9 @@ I used a protocol to manage Loading Indicator in viewController: (whenever we wa
 
 ![Protocol to manage loading Indicator](https://user-images.githubusercontent.com/40691961/197011415-e3e775d3-b365-40fd-bff4-a5b77e4eddfe.png)
 
-**APICaller**
+**NewsApiRepository**
 
-I created the singleton "APICaller" just to perform API Calls and created a consolidated function to run all get calls for Articles. 
+I created the singleton "NewsApiRepository" just to perform API Calls. 
 
 **MVVM Architecture**
 
