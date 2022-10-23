@@ -8,9 +8,16 @@
 import Foundation
 
 enum NewsArticlesCallType: String {
+        case topHeadlines = "https://newsapi.org/v2/top-headlines?"
+        case searchQuery = "https://newsapi.org/v2/everything?"
+}
+
+enum NewsArticlesUrlParameters: String {
     //TODO: - Remove APIKey from APICaller
-    case topHeadlines = "https://newsapi.org/v2/top-headlines?country=US&apiKey=da861279e5024fedbb825ccb49495edf"
-    case searchQuery = "https://newsapi.org/v2/everything?sortBy=popularity&apiKey=da861279e5024fedbb825ccb49495edf&q="
+    case apiKey = "&apiKey=495b6c78842c4ab9903085dacfddce97"
+    case country = "country=US"
+    case sortBy = "sortBy=popularity"
+    case query = "&q="
 }
 
 enum ArticlesApiCallsDebugPrintType {
@@ -100,11 +107,19 @@ final class APICaller {
         
         switch callType {
         case .topHeadlines:
-            guard let urlToUse = URL(string: NewsArticlesCallType.topHeadlines.rawValue) else { return nil}
+            let urlString = NewsArticlesCallType.topHeadlines.rawValue +
+            NewsArticlesUrlParameters.country.rawValue +
+            NewsArticlesUrlParameters.apiKey.rawValue
+            guard let urlToUse = URL(string: urlString) else { return nil}
             url = urlToUse
         case .searchQuery:
             guard let query = query, !query.trimmingCharacters(in: .whitespaces).isEmpty else { return nil}
-            guard let urlToUse = URL(string: NewsArticlesCallType.searchQuery.rawValue + query) else { return nil}
+            let urlString = NewsArticlesCallType.searchQuery.rawValue +
+            NewsArticlesUrlParameters.sortBy.rawValue +
+            NewsArticlesUrlParameters.apiKey.rawValue +
+            NewsArticlesUrlParameters.query.rawValue +
+            query
+            guard let urlToUse = URL(string: urlString) else { return nil}
             url = urlToUse
         }
         
