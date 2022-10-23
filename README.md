@@ -8,27 +8,27 @@ In the home page will appear the last 20 Top Headlines and it's possible to navi
 
 I used delegation pattern as a trigger for some necessary actions from ViewModel into the ViewController
 
-**Image Cache**
-
-To avoid download images repeatedly, i keep downloaded images in the cache and reuse them as tableViewCell appears on screen.
-Managing images cache by extention "Extention+UIImageView.swift" :
-
-<img width="763" alt="Screen Shot 2022-10-23 at 12 50 22" src="https://user-images.githubusercontent.com/40691961/197402245-863e124d-65d2-471a-96d6-b138efb7a7c4.png">
-
 **NewsAppLoadingProtocol**
 
 I used a protocol to manage Loading Indicator in viewController: (whenever we want to show the Loading indicator, just need to conform the "ViewController" to protocol "NewsAppLoadingProtocol" and then call functions "showLoadingIndicator", "closeLoadingIndicator"):
 
 ![Protocol to manage loading Indicator](https://user-images.githubusercontent.com/40691961/197011415-e3e775d3-b365-40fd-bff4-a5b77e4eddfe.png)
 
-**NewsApiRepository**
-
-I created the singleton "NewsApiRepository" just to perform API Calls. 
-
 **MVVM Architecture**
 
 I used mvvm architecture to separate all responsibilities between different layers:
 ViewModels, Views, APICaller, Models, protocols
+
+**NewsApiRepository**
+
+I created the singleton "NewsApiRepository" just to perform API Calls. 
+
+**Image Cache**
+
+To avoid download images repeatedly, i keep downloaded images in the cache and reuse them as tableViewCell appears on screen.
+Managing images cache by extention "Extention+UIImageView.swift" :
+
+<img width="763" alt="Screen Shot 2022-10-23 at 12 50 22" src="https://user-images.githubusercontent.com/40691961/197402245-863e124d-65d2-471a-96d6-b138efb7a7c4.png">
 
 **AppIcone**
 
