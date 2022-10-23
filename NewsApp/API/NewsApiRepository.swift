@@ -14,7 +14,7 @@ enum NewsArticlesCallType: String {
 
 enum NewsArticlesUrlParameters: String {
     //TODO: - Remove APIKey from NewsApiRepository
-    case apiKey = "&apiKey=da861279e5024fedbb825ccb49495edf"
+    case apiKey = "&apiKey=495b6c78842c4ab9903085dacfddce97" //"&apiKey=da861279e5024fedbb825ccb49495edf"
     case country = "country=US"
     case sortBy = "sortBy=popularity"
     case query = "&q="
@@ -28,7 +28,7 @@ enum ArticlesApiCallsDebugPrintType {
 
 protocol NewsApiRepositoryProtocol {
     func performApiNewsGetCall<T>(callType: NewsArticlesCallType, with query: String?, completion: @escaping (Result<T, Error>) -> Void)
-    func fetchImage(url: URL, completion: @escaping  (Result<Data, Error>) -> Void)
+    func fetchImage(url: URL, completion: @escaping (Result<Data, Error>) -> Void)
 }
 
 final class NewsApiRepository {
@@ -44,6 +44,7 @@ final class NewsApiRepository {
             NewsArticlesUrlParameters.apiKey.rawValue
             guard let urlToUse = URL(string: urlString) else { return nil}
             url = urlToUse
+            
         case .searchQuery:
             guard let query = query, !query.trimmingCharacters(in: .whitespaces).isEmpty else { return nil}
             let urlString = NewsArticlesCallType.searchQuery.rawValue +
@@ -61,7 +62,7 @@ final class NewsApiRepository {
 
 //MARK: - NewsApiRepositoryProtocol, ArticlesApiCallsDebugPrintProtocol
 extension NewsApiRepository: NewsApiRepositoryProtocol, ArticlesApiCallsDebugPrintProtocol {
-    public func performApiNewsGetCall<T>(callType: NewsArticlesCallType, with query: String?, completion: @escaping (Result<T, Error>) -> Void) {
+    func performApiNewsGetCall<T>(callType: NewsArticlesCallType, with query: String?, completion: @escaping (Result<T, Error>) -> Void) {
         let url: URL? = getUrl(callType: callType, with: query)
         
         self.articlesApiCallsDebugPrint(type: .startCalling, callType: callType, dataToPrint: url?.absoluteString)
@@ -90,15 +91,27 @@ extension NewsApiRepository: NewsApiRepositoryProtocol, ArticlesApiCallsDebugPri
         task.resume()
     }
     
-    public func fetchImage(url: URL, completion: @escaping  (Result<Data, Error>) -> Void) {
-        let task = URLSession.shared.dataTask(with: url) { (data, _, error) in
+    private func getData(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
+    /// downloadImage function will download the thumbnail images
+    /// returns Result<Data> as completion handler
+    func fetchImage(url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
+        NewsApiRepository.sharedInstance.getData(url: url) { data, response, error in
+            
             if let error = error {
                 completion(.failure(error))
-            } else if let data = data {
+                return
+            }
+            
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            DispatchQueue.main.async() {
                 completion(.success(data))
             }
         }
-        
-        task.resume()
     }
 }

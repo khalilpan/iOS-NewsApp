@@ -87,7 +87,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.reuseIdentifier, for: indexPath) as? HomeTableViewCell else { return UITableViewCell() }
         
         if (indexPath.row < self.viewModel.headLines.count) {
-            cell.setupData(data: self.viewModel.headLines[indexPath.row])
+            let cellData = self.viewModel.headLines[indexPath.row]
+            cell.setupData(data: cellData)
         }
         
         return cell

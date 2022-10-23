@@ -74,27 +74,8 @@ class HomeTableViewCell: UITableViewCell {
     func setupData(data: HomeTableViewCellType) {
         self.newsTitleLabel.text = data.title
         self.subTitleLabel.text = data.subtitle
-        var imageData = data.imageData
-        
-        if let image = imageData {
-            newsImageView.image = UIImage(data: image)
-        } else if let url = data.imageURL {
-            
-            //TODO: - Move NewsApiRepository to HomeViewModel
-            NewsApiRepository.sharedInstance.fetchImage(url: url, completion: { [weak self] result in
-                guard let self = self else { return }
-                
-                switch result {
-                case .success(let data):
-                    imageData = data
-                    DispatchQueue.main.async {
-                        self.newsImageView.image = UIImage(data: data)
-                    }
-                    
-                case .failure(let error):
-                    debugPrint(error)
-                }
-            })
+        if let urlString = data.imageURL?.absoluteString {
+            self.newsImageView.loadThumbnail(urlSting: urlString)
         }
     }
 }
