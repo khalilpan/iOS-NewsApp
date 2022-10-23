@@ -11,6 +11,9 @@ I used delegation pattern as a trigger for some necessary actions from ViewModel
 **Image Cache**
 
 To avoid download images repeatedly, i keep downloaded images in the cache and reuse them as tableViewCell appears on screen.
+Managing images cache by extention "Extention+UIImageView.swift" :
+
+<img width="763" alt="Screen Shot 2022-10-23 at 12 50 22" src="https://user-images.githubusercontent.com/40691961/197402245-863e124d-65d2-471a-96d6-b138efb7a7c4.png">
 
 **NewsAppLoadingProtocol**
 
