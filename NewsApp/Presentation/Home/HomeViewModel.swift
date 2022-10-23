@@ -12,22 +12,6 @@ protocol TopHeadlinesFetchDelegate: AnyObject {
     func loadingFinished()
 }
 
-struct HomeTableViewCellType {
-    let title: String
-    let subtitle: String
-    let imageURL: URL?
-    var imageData: Data? = nil
-    
-    init(title: String,
-         subtitle: String,
-         imageURL: URL?
-    ) {
-        self.title = title
-        self.subtitle = subtitle
-        self.imageURL = imageURL
-    }
-}
-
 class HomeViewModel {
     var headLines: [HomeTableViewCellType] = []
     var articles: [Article] = []
@@ -36,6 +20,21 @@ class HomeViewModel {
     var showLoadingIndicator: Bool = true
     
     init() {
+        setupCompletionClosure()
+    }
+    
+    func fetchHealdLines(calltype: NewsArticlesCallType,with query: String?,showLoadingIndicator: Bool = true) {
+        self.showLoadingIndicator = showLoadingIndicator
+        guard let completionClosure = self.completionClosure else { return }
+        
+        //TODO: - Create a BusinessModel and use it inside viewModel instead of Accessing directly Repository(Accessing Repository should be just from businessModel)
+        NewsApiRepository.sharedInstance.performApiNewsGetCall(callType: calltype,
+                                                               with: query,
+                                                               completion: completionClosure)
+        self.delegate?.loadingFinished()
+    }
+    
+    private func setupCompletionClosure() {
         self.completionClosure = { [weak self] result in
             guard let self = self else { return }
             self.showLoadingIndicator ? self.delegate?.loadingStarted() : nil
@@ -57,14 +56,5 @@ class HomeViewModel {
             
             self.delegate?.loadingFinished()
         }
-    }
-    
-    func fetchHealdLines(calltype: NewsArticlesCallType,with query: String?,showLoadingIndicator: Bool = true) {
-        self.showLoadingIndicator = showLoadingIndicator
-        guard let completionClosure = self.completionClosure else { return }
-        NewsApiRepository.sharedInstance.performApiNewsGetCall(callType: calltype,
-                                                       with: query,
-                                                       completion: completionClosure)
-        self.delegate?.loadingFinished()
     }
 }

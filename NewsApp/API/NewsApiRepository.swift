@@ -1,5 +1,5 @@
 //
-//  APICaller.swift
+//  NewsApiRepository.swift
 //  NewsApp
 //
 //  Created by khalil on 19/10/22.
@@ -13,7 +13,7 @@ enum NewsArticlesCallType: String {
 }
 
 enum NewsArticlesUrlParameters: String {
-    //TODO: - Remove APIKey from APICaller
+    //TODO: - Remove APIKey from NewsApiRepository
     case apiKey = "&apiKey=da861279e5024fedbb825ccb49495edf"
     case country = "country=US"
     case sortBy = "sortBy=popularity"
@@ -35,7 +35,6 @@ final class NewsApiRepository {
     static let sharedInstance = NewsApiRepository()
     
     private func getUrl(callType: NewsArticlesCallType, with query: String?) -> URL? {
-        
         var url: URL? = nil
         
         switch callType {
@@ -74,6 +73,7 @@ extension NewsApiRepository: NewsApiRepositoryProtocol, ArticlesApiCallsDebugPri
                 completion(.failure(error))
             } else if let data = data {
                 do {
+                    //TODO: - Move JSONDecoder to businessModel
                     let result = try JSONDecoder().decode(APIResponse.self, from: data)
                     
                     self.articlesApiCallsDebugPrint(type: .successResult, callType: callType, dataToPrint: String(result.articles.count))
