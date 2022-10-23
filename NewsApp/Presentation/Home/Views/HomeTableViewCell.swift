@@ -81,7 +81,7 @@ class HomeTableViewCell: UITableViewCell {
         } else if let url = data.imageURL {
             
             //TODO: - Move APICaller to HomeViewModel
-            APICaller.sharedInstance.fetchImage(url: url, completion: { [weak self] result in
+            NewsApiRepository.sharedInstance.fetchImage(url: url, completion: { [weak self] result in
                 guard let self = self else { return }
                 
                 switch result {
