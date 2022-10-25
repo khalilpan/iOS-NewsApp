@@ -86,8 +86,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.reuseIdentifier, for: indexPath) as? HomeTableViewCell else { return UITableViewCell() }
         
-        if (indexPath.row < self.viewModel.headLines.count) {
-            let cellData = self.viewModel.headLines[indexPath.row]
+        if let data = self.viewModel.headLines[safe: indexPath.row] {
+            let cellData = data
             cell.setupData(data: cellData)
         }
         
@@ -97,8 +97,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if (indexPath.row < self.viewModel.articles.count) {
-            let article = self.viewModel.articles[indexPath.row]
+        if let article = self.viewModel.articles[safe: indexPath.row] {
             
             guard let url = URL(string: article.url) else { return }
             
