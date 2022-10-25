@@ -19,16 +19,22 @@ I used a protocol to manage Loading Indicator in viewController: (whenever we wa
 I used mvvm architecture to separate all responsibilities between different layers:
 ViewModels, Views, APICaller, Models, protocols
 
-**NewsApiRepository**
-
-I created the singleton "NewsApiRepository" just to perform API Calls. 
-
 **Image Cache**
 
 To avoid download images repeatedly, i keep downloaded images in the cache and reuse them as tableViewCell appears on screen.
 Managing images cache by extention "Extention+UIImageView.swift" :
 
 <img width="763" alt="Screen Shot 2022-10-23 at 12 50 22" src="https://user-images.githubusercontent.com/40691961/197402245-863e124d-65d2-471a-96d6-b138efb7a7c4.png">
+
+**Extention+Collection**
+
+To avoid "Index Out of Bounds" crash error when accessing collections elements, i added an extention to access elements safely:
+
+![image](https://user-images.githubusercontent.com/40691961/197822141-5e494e23-8505-4cff-8163-df8e4ad82baf.png)
+
+**NewsApiRepository**
+
+I created the singleton "NewsApiRepository" just to perform API Calls. 
 
 **AppIcone**
 
