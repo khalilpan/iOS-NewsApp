@@ -33,7 +33,8 @@ protocol NewsApiRepositoryProtocol {
 
 final class NewsApiRepository {
     static let sharedInstance = NewsApiRepository()
-    
+    private init() {}
+
     private func getUrl(callType: NewsArticlesCallType, with query: String?) -> URL? {
         var url: URL? = nil
         
